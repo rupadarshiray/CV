@@ -26,7 +26,7 @@
 \setlist[description]{leftmargin=*}
 %% Adjust the spacing of two consecutive dots in \dotfill.
 \makeatletter
-	\newcommand \lltxdotfill {\leavevmode \cleaders \hb@xt@ 1em{\hss .\hss }\hfill \kern \z@}
+	\newcommand \lltxdotfill {\leavevmode \cleaders \hb@xt@ 0.6em{\hss .\hss }\hfill \kern \z@}
 \makeatother
 %% No page numbers.
 \pagenumbering{gobble}
@@ -85,8 +85,11 @@
 
 %% \lltxSubSection
 \newcommand{\lltxSubSection}[1]{
-	\vspace{1.5em}
+	
+	\vspace{2em}
 	\noindent \textbf{#1}
+	\hrule
+	\vspace{0.3em}
 }
 
 %% \begin{lltxDescription}{SectionTitle}
@@ -110,6 +113,7 @@
 %%% change the symbols of first and second levels of itemize
 \NewEnviron{lltxItemize}{
 	\begin{itemize}
+		\setlength\itemsep{-0.4em}
 		\BODY
 	\end{itemize}
 }
@@ -134,9 +138,25 @@
 	{% else, then
 		\newline \textit{#1}
 	}
-	\begin{itemize}[leftmargin=!, label=$\cdot$]
+	\begin{itemize}[leftmargin=!, label=$\star$]
+		\setlength\itemsep{-0.4em}
 		\BODY
 	\end{itemize}
+}
+
+\NewEnviron{lltsJob}[4][]{
+	% leave an empty line for the linejump, yup it is ugly
+
+	\vspace{4px}
+	#2 \lltxdotfill #3 $\cdot$#4
+	\ifthenelse{\isempty{#1}}{ % if #1 is empty, then 
+	}
+		% do nothing
+	{% else, then
+		\newline \textit{#1}
+	}
+	\BODY
+	\vspace{4px}
 }
 
 %% \NTS{Note to self}
