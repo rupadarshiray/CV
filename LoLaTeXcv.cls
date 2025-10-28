@@ -27,7 +27,9 @@
 %% Adjust the spacing of two consecutive dots in \dotfill.
 \makeatletter
 	\newcommand \lltxdotfill {\leavevmode \cleaders \hb@xt@ 0.6em{\hss .\hss }\hfill \kern \z@}
+	\newcommand \lltxnodotfill {\leavevmode \cleaders \hb@xt@ 1 em{\hss \empty \hss }\hfill \kern \z@}
 \makeatother
+
 %% No page numbers.
 \pagenumbering{gobble}
 % No indentation.
@@ -88,8 +90,8 @@
 	
 	\vspace{2em}
 	\noindent \textbf{#1}
-	\hrule
-	\vspace{0.3em}
+	% \hrule
+	% \vspace{0.3em}
 }
 
 %% \begin{lltxDescription}{SectionTitle}
@@ -131,12 +133,12 @@
 	% leave an empty line for the linejump, yup it is ugly
 
 	\vspace{4px}
-	#2 \lltxdotfill #3 $\cdot$#4
+	#2 \lltxdotfill #3
 	\ifthenelse{\isempty{#1}}{ % if #1 is empty, then 
 	}
 		% do nothing
 	{% else, then
-		\newline \textit{#1}
+		\newline \textit{#1} \lltxnodotfill #4
 	}
 	\begin{itemize}[leftmargin=!, label=$\star$]
 		\setlength\itemsep{-0.4em}
@@ -148,15 +150,14 @@
 	% leave an empty line for the linejump, yup it is ugly
 
 	\vspace{4px}
-	#2 \lltxdotfill #3 $\cdot$#4
+	#2 \lltxdotfill #3
 	\ifthenelse{\isempty{#1}}{ % if #1 is empty, then 
 	}
 		% do nothing
 	{% else, then
-		\newline \textit{#1}
+		\newline \textit{#1} \lltxnodotfill #4
 	}
-	\BODY
-	\vspace{4px}
+	\newline
 }
 
 %% \NTS{Note to self}
